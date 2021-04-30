@@ -77,8 +77,7 @@ function Ethermine() {
         <div className="row d-flex justify-content-center">
           { dash.workers.map((worker, index) => <Worker data={ worker } key={index}/>) }
         </div>
-      </div>
-      dash: { JSON.stringify(dash, 2, null) }
+      </div> 
     </div>
   );
 }
