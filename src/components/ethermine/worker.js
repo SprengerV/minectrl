@@ -13,7 +13,7 @@ function Worker(props) {
   return (
     <div className="col-3 container d-flex flex-column">
       <h5 className="text-center">{ worker.worker }</h5>
-      <p>Current Hashrate: { hToMh(worker.currentHashrate) }</p>
+      <p>Current Hashrate: { hToMh(worker.currentHashrate) } Mh/s</p>
       <p>
         Valid Shares: <span className="valid">{ worker.validShares }</span>
       </p>
