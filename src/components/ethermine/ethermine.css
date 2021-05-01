@@ -4,3 +4,7 @@
 .valid {
   color: green;
 }
+.worker {
+  border: 3px solid lightgray;
+  margin-bottom: 36px;
+}
