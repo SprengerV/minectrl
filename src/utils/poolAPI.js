@@ -14,7 +14,7 @@ const poolAPI = {
   ethermine: function() {
     return axios.get(ethMinerURL + '/dashboard');
   },
-  ltcpool: function() {
+  ltcPool: function() {
     return axios.get(ltcMinerURL);
   },
   coolmine: function() {

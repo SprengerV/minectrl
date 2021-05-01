@@ -10,19 +10,19 @@ function LitecoinPool() {
   const [update, setUpdate] = useState('never');
   
   const tick = () => {
-    setCount(prevState => prevState < 2 ? prevState + 1 : 0);
+    setCount((prevState) => prevState < 2 ? prevState + 1 : 0);
   }
 
   useEffect(() => {
-    const timer = setInterval(tick, 150000);
-    return clearInterval(timer);
+    const timer = setInterval(() => tick(), 150000);
+    return () => clearInterval(timer);
   });
 
   useEffect(() => {
     if (count === 0) {
       ltcPool()
         .then(res => {
-          setUpdate(dayjs().format('d/m/YYYY @h:mma'));
+          setUpdate(dayjs().format('D/M/YYYY @h:mma'));
           setDash(res);
         })
         .catch(err => console.log(err));
@@ -37,7 +37,7 @@ function LitecoinPool() {
             <p>Last Updated: { update }</p>
           </div>  
         </div>
-        <div className="row d-flex justify-content-around">
+        <div className="row d-flex">
           <div className="col-3">
             <a href="https://litecoinpool.org/account" target="_blank" rel="noreferrer">
               <h3>litecoinpool.org</h3>
@@ -46,10 +46,12 @@ function LitecoinPool() {
         </div>
         <div className="row d-flex justify-content-center">
     { /* workers.map */ }
-        </div>  
+        </div>
+        <div className="row">
+          dash: { JSON.stringify(dash) }
+        </div>
       </div>
-      dash: { dash } 
-    </div>  
+     </div>  
   );
 }
 
