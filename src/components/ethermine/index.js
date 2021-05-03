@@ -45,12 +45,14 @@ function Ethermine() {
             <p>Last updated: { dash.updated }</p>
           </div>  
         </div>
-        <div className="row d-flex justify-content-around">
+        <div className="row">         
           <div className="col-3">
             <a href={ ethermineURL } target="_blank" rel="noreferrer">
               <h3>Ethermine.org</h3>
             </a>
           </div>
+        </div>
+        <div className="row d-flex justify-content-around">
           <div className="col-3">
             <h4>Workers:</h4>
             <p>{ dash.currentStatistics.activeWorkers }</p>

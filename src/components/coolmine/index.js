@@ -23,7 +23,7 @@ function CoolMine() {
     <div className="row">
       <div className="col-10 ms-auto me-auto container card">
         <div className="row d-flex flex-row-reverse">
-          <div className="col-2">
+          <div className="col-3 d-flex justify-content-end">
             <p>Last Updated: { update }</p>
           </div>
         </div>
