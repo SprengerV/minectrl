@@ -6,53 +6,43 @@ import * as dayjs from 'dayjs';
 import dotenv from 'dotenv'
 import './ethermine.css';
 dotenv.config();
+const { ethermine } = poolAPI;
+const { hToMh, satToEth } = conversion;
 
 function Ethermine() {
-  const { ethermine } = poolAPI;
-  const { hToMh, satToEth } = conversion;
-  const [dash, setDash] = useState(
+   const [dash, setDash] = useState(
     {
+      update: 'never',
       currentStatistics : {
-        activeWorkers: null,
-        currentHashrate: null,
-        unpaid: null
+        activeWorkers: undefined,
+        currentHashrate: undefined,
+        unpaid: undefined
       },
       workers: []
     }
   );
-  const [update, setUpdate] = useState('');
-  const [count, setCount] = useState(0);
   const ethermineURL = 'https://ethermine.org/miners/' + process.env.REACT_APP_ETH_ADDR.substring(2) + '/dashboard';
 
-  const tick = () => {
-    setCount((prevState) => prevState < 2 ? prevState + 1 : 0);
-  };
-
   useEffect(() => {
-    const timer = setInterval(() => tick(), 150000);
-    return () => clearInterval(timer);
-  });
-
-  useEffect(() => { 
-    if (count === 0) {
+    const getEth = () => {
       ethermine()
-        .then(({ data }) => { 
-          setUpdate(dayjs().format('M/D/YYYY @h:mma'));
+        .then(({ data }) => {
+          data.data.updated = dayjs().format('M/D/YYYY @h:mma');
           setDash(data.data);
         })
-        .catch(err => {
-          console.log(err)
-        });
-      console.log('dash2', dash )
+        .catch(err => console.log(err));
     }
-  }, [count, dash, ethermine]);
+    getEth();
+    const interval = setInterval(() => getEth(), 300000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="row">
       <div className="col-10 ms-auto me-auto container card">
         <div className="row d-flex flex-row-reverse">
           <div className="col-3 d-flex justify-content-end">
-            <p>Last updated: { update }</p>
+            <p>Last updated: { dash.updated }</p>
           </div>  
         </div>
         <div className="row d-flex justify-content-around">
