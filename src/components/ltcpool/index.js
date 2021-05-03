@@ -3,38 +3,33 @@ import poolAPI from '../../utils/poolAPI';
 import Worker from './worker.js';
 import * as dayjs from 'dayjs'
 
+const { ltcPool } = poolAPI;
+
 function LitecoinPool() {
-  const { ltcPool } = poolAPI;
-  const [dash, setDash] = useState({});
-  const [count, setCount] = useState(0);
-  const [update, setUpdate] = useState('never');
-  
-  const tick = () => {
-    setCount((prevState) => prevState < 2 ? prevState + 1 : 0);
-  }
+   const [dash, setDash] = useState({
+    updated: 'never',
+  }); 
 
   useEffect(() => {
-    const timer = setInterval(() => tick(), 150000);
-    return () => clearInterval(timer);
-  });
-
-  useEffect(() => {
-    if (count === 0) {
+    const ltc = () => {
       ltcPool()
         .then(res => {
-          setUpdate(dayjs().format('D/M/YYYY @h:mma'));
+          res.updated = dayjs().format('D/M/YYYY @h:mma');
           setDash(res);
         })
         .catch(err => console.log(err));
     }
-  }, [count, ltcPool]);
+    ltc();
+    const timer = setInterval(ltc(), 300000);
+    return clearInterval(timer);
+  }, []);
 
   return (
     <div className="row">
       <div className="col-10 ms-auto me-auto container card">
         <div className="row d-flex flex-row-reverse">
           <div className="col-3 d-flex justify-content-end">
-            <p>Last Updated: { update }</p>
+            <p>Last Updated: { dash.updated }</p>
           </div>  
         </div>
         <div className="row d-flex">
