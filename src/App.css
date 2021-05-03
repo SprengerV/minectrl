@@ -1,9 +1,7 @@
 .card {
-  margin: 5vh 0 5vh 0;
+  margin: 0 0 5vh 0;
 }
 #app {
   background-color: whitesmoke;
-  color: black;
-  height: 100vh;
-  width: 100vw;
+  color: black;  
 }

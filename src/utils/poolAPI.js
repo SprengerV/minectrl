@@ -13,7 +13,9 @@ const poolAPI = {
     return axios.get(ethMinerURL + '/dashboard');
   },
   ltcPool: () => {
-    return axios.get(ltcMinerURL);
+    return axios.get(ltcMinerURL, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   } 
 };
 
