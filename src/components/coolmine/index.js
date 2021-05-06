@@ -8,7 +8,9 @@ function CoolMine() {
   //const [dash, setDash] = useState({});
   //const [count, setCount] = useState(0);
   const [update, setUpdate] = useState('never')
-  const coolmineURL = 'https://coolmine.top/miner.php?coin=1&wallet=' + process.env.REACT_APP_ARRR_ADDR;   
+  const coolmineURL = 'https://coolmine.top/miner.php?coin=1&wallet=' + process.env.REACT_APP_ARRR_ADDR;
+  const zanziURL = 'http://' + process.env.REACT_APP_ZANZI_IP + '/';
+
   const reload = () => {
     document.getElementById('coolmine').src += '';
     setUpdate(dayjs().format('M/D/YYYY @h:mma'));
@@ -31,6 +33,11 @@ function CoolMine() {
           <div className="col-3">
             <a href={ coolmineURL } target="_blank" rel="noreferrer">
               <h3>CoolMine.top (ARRR)</h3>
+            </a>
+          </div>
+          <div className="col-3">
+            <a href={ zanziURL } target="_blank" rel="noreferrer">
+              <h3>Zanzi</h3>
             </a>
           </div>
           <div className="col-1">
